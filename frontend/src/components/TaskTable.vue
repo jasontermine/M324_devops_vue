@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { useTodoStore, type ITodo } from "@/stores/todoStore";
-import { computed, type ComputedRef } from "vue";
+import { computed, type ComputedRef, onMounted } from "vue";
 
 const todoStore = useTodoStore();
 const todos: ComputedRef<ITodo[]> = computed(() => todoStore.getTodoList);
@@ -39,4 +39,11 @@ const todos: ComputedRef<ITodo[]> = computed(() => todoStore.getTodoList);
 const handleDelete = (taskdescription: string): void => {
   todoStore.deleteTodo(taskdescription);
 };
+
+/**
+ * Fetches the todo list on component mount.
+ */
+onMounted(() => {
+  todoStore.fetchTodoList()
+})
 </script>
