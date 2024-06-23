@@ -90,11 +90,11 @@ export const useTodoStore = defineStore("todoStore", {
      */
     async deleteTodo(taskdescription: string): Promise<void> {
       const payload: ITodo = {
-        taskdescription: taskdescription.trim(),
+        "taskdescription": taskdescription,
       };
 
       await base
-        .post(`/delete`, payload )
+        .delete(`/delete`, { data: payload })
         .then((res: AxiosResponse<any, any>) => {
           this.fetchTodoList();
         })
